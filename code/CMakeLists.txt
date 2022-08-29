@@ -693,6 +693,17 @@ if (NOT ASSIMP_NO_EXPORT)
     AssetLib/Step/StepExporter.h
     AssetLib/Step/StepExporter.cpp)
 
+  ADD_ASSIMP_EXPORTER( BVH
+    AssetLib/BVH/BVHExporter.h
+    AssetLib/BVH/BVHExporter.cpp
+    AssetLib/BVH/BVHCommon.h
+    AssetLib/BVH/BVHCommon.cpp
+    AssetLib/BVH/BVHAsset.h
+    AssetLib/BVH/BVHAsset.inl
+    AssetLib/BVH/BVHAssetWriter.h
+    AssetLib/BVH/BVHAssetWriter.inl
+  )
+
 endif()
 
 SET( PostProcessing_SRCS

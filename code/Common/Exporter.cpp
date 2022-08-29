@@ -115,6 +115,9 @@ void ExportSceneGLB(const char*, IOSystem*, const aiScene*, const ExportProperti
 void ExportSceneGLTF2(const char*, IOSystem*, const aiScene*, const ExportProperties*);
 void ExportSceneGLB2(const char*, IOSystem*, const aiScene*, const ExportProperties*);
 #endif
+#ifndef ASSIMP_BUILD_NO_BVH_EXPORTER
+void ExportSceneBVH(const char*, IOSystem*, const aiScene*, const ExportProperties*);
+#endif
 #ifndef ASSIMP_BUILD_NO_ASSBIN_EXPORTER
 void ExportSceneAssbin(const char*, IOSystem*, const aiScene*, const ExportProperties*);
 #endif

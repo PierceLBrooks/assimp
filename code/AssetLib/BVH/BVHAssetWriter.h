@@ -1,15 +1,15 @@
 /*
----------------------------------------------------------------------------
 Open Asset Import Library (assimp)
----------------------------------------------------------------------------
+----------------------------------------------------------------------
 
 Copyright (c) 2006-2022, assimp team
+
 
 All rights reserved.
 
 Redistribution and use of this software in source and binary forms,
-with or without modification, are permitted provided that the following
-conditions are met:
+with or without modification, are permitted provided that the
+following conditions are met:
 
 * Redistributions of source code must retain the above
 copyright notice, this list of conditions and the
@@ -36,44 +36,41 @@ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
----------------------------------------------------------------------------
+
+----------------------------------------------------------------------
 */
-#include "AbstractImportExportBase.h"
-#include "UnitTestPCH.h"
 
-#include <assimp/postprocess.h>
-#include <assimp/Importer.hpp>
+/** @file BVHWriter.h
+ * Declares a class to write bvh files
+ * 
+ */
+#ifndef BVHASSETWRITER_H_INC
+#define BVHASSETWRITER_H_INC
 
-using namespace Assimp;
+#if !defined(ASSIMP_BUILD_NO_BVH_EXPORTER) 
 
-class utBVHImportExport : public AbstractImportExportBase {
+#include "BVHAsset.h"
+
+namespace BVH
+{
+class AssetWriter
+{
 public:
-    bool importerTest() override {
-        Assimp::Importer importer;
-        const aiScene *scene = importer.ReadFile(ASSIMP_TEST_MODELS_DIR "/BVH/01_01.bvh", aiProcess_ValidateDataStructure);
-        return nullptr != scene;
-    }
-    
-#ifndef ASSIMP_BUILD_NO_EXPORT
-    bool exporterTest() override {
-        Assimp::Importer importer;
-        Assimp::Exporter exporter;
-        const aiScene *scene = importer.ReadFile(ASSIMP_TEST_MODELS_DIR "/BVH/01_01.bvh",
-                aiProcess_ValidateDataStructure);
-        EXPECT_NE(nullptr, scene);
-        EXPECT_EQ(aiReturn_SUCCESS, exporter.Export(scene, ASSIMP_TEST_MODELS_DIR "/BVH/01_01_out.bvh"));
+    Document mDoc;
+    Asset& mAsset;
 
-        return true;
-    }
-#endif // ASSIMP_BUILD_NO_EXPORT
+    MemoryPoolAllocator<>& mAl;
+
+    AssetWriter(Asset& asset);
+
+    void WriteFile(const char* path);
 };
 
-TEST_F(utBVHImportExport, importBlenFromFileTest) {
-    EXPECT_TRUE(importerTest());
 }
 
-#ifndef ASSIMP_BUILD_NO_EXPORT
-TEST_F(utBVHImportExport, exportBlenFromFileTest) {
-    EXPECT_TRUE(exporterTest());
-}
-#endif // ASSIMP_BUILD_NO_EXPORT
+// Include the implementation of the methods
+#include "BVHAssetWriter.inl"
+
+#endif // ASSIMP_BUILD_NO_BVH_EXPORTER
+
+#endif // BVHASSETWRITER_H_INC
