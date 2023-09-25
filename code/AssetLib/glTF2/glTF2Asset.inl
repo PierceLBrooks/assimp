@@ -484,7 +484,10 @@ Ref<T> LazyDict<T>::Retrieve(unsigned int i) {
         throw DeadlyImportError("GLTF: Field \"", mDictId, "\"  is not an array");
     }
 
-    if (i >= mDict->Size()) {
+    if (i == mDict->Size()) {
+        return Ref<T>();
+    }
+    if (i > mDict->Size()) {
         throw DeadlyImportError("GLTF: Array index ", i, " is out of bounds (", mDict->Size(), ") for \"", mDictId, "\"");
     }
 
