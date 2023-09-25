@@ -971,7 +971,7 @@ void glTF2Exporter::ExportMaterials() {
  * Returns true on success, and false otherwise.
  */
 bool FindMeshNode(Ref<Node> &nodeIn, Ref<Node> &meshNode, const std::string &meshID) {
-    if (!nodeIn()) {
+    if (!nodeIn) {
         return false;
     }
 
