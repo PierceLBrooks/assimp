@@ -1038,6 +1038,9 @@ void ExportSkin(Asset &mAsset, const aiMesh *aimesh, Ref<Mesh> &meshRef, Ref<Buf
         // aib->mName   =====>  skinRef->jointNames
         // Find the node with id = mName.
         Ref<Node> nodeRef = mAsset.nodes.Get(aib->mName.C_Str());
+        if (!nodeRef) {
+            continue;
+        }
         nodeRef->jointName = nodeRef->name;
 
         unsigned int jointNamesIndex = 0;
