@@ -159,6 +159,9 @@ namespace glTF2 {
 
         for (size_t i = 0; i < unsigned(a.channels.size()); ++i) {
             Animation::Channel& c = a.channels[i];
+            if (!c.target.node) {
+                continue;
+            }
             Value valChannel;
             valChannel.SetObject();
             {

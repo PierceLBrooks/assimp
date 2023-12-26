@@ -135,6 +135,7 @@ namespace glTF {
 
         for (size_t i = 0; i < unsigned(a.Channels.size()); ++i) {
             Animation::AnimChannel& c = a.Channels[i];
+            if (!c.target.id) continue;
             Value valChannel;
             valChannel.SetObject();
             {
