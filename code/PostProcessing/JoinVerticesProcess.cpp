@@ -406,7 +406,7 @@ int JoinVerticesProcess::ProcessMesh( aiMesh* pMesh, unsigned int meshIndex) {
                 }
             }
         } else {
-            ASSIMP_LOG_ERROR( "X-Export: aiBone shall contain weights, but pointer to them is nullptr." );
+            ASSIMP_LOG_ERROR( (std::string("X-Export: aiBone \"") + bone->mName.C_Str() + "\"shall contain weights, but pointer to them is nullptr.").c_str() );
         }
 
         if (newWeights.size() > 0) {
